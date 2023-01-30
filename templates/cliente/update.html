@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1> Actualizacion de Cliente </h1>
+
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+        {{form.as_p}}
+        <input type="submit" value="Alta"> 
+
+    </form>
+
+{% endblock content %}
+    

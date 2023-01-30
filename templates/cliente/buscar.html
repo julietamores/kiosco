@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="GET">
+    <input type="text" placeholder="apellido" id="kword" name="kword">
+    <input type="submit" value="buscar">    
+</form>
+
+<ul>
+    {% for Cliente in Clientes %}
+        <li>{{Cliente.apellido}}, {{Cliente.nombre}}</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
+

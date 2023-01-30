@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+<h1> Lista de Clientes</h1>
+
+<div class="listaCliente">
+    <h2><strong>Apellido</strong></h2>
+    <h2><strong>Nombre</strong></h2>
+    <h2><strong>Dni</strong></h2>
+    <h2><strong>Acciones</strong></h2>
+    {% for Cliente in Clientes %}
+    <p>{{Cliente.apellido}}</p>
+    <p>{{Cliente.nombre}}</p>
+    <p>{{Cliente.documento}}</p>
+    <p>
+        <a href="{%url 'cliente_app:Detalle del cliente' cliente.id%}">Ver  </a>
+        <a href="{%url 'cliente_app:Actualizar cliente' cliente.id%}">Modificar  </a>
+        <a href="{%url 'cliente_app:Baja de cliente' cliente.id%}">Eliminar</a>
+    </p>
+    {% endfor %}
+
+</div>
+
+{% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}">Atras</a>
+    {% endif %}
+
+    {% for pagina in paginator.page_range %}
+    {% ifequal pagina page_obj.number %}
+        {{pagina}}
+    {% else %}
+        <a href="?page={{pagina}}">{{pagina}}</a>
+    {% endifequal %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{page_obj.next_page_number}}">Siguiente</a>
+    {% endif %}
+
+{% endif %}
+
+{% endblock content %}
+    
+
