@@ -18,7 +18,6 @@ from django.views.generic import (
 class ClienteListView(ListView):
     model = Cliente
     template_name = "cliente/lista.html"
-    ordering = 'apellidos'
     paginate_by = 3
     context_object_name = 'cliente'
 
