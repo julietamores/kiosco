@@ -1,8 +1,23 @@
 body{
-    background-color: rgb(228, 202, 250);
+    background-color: rgb(212, 160, 185);
 }
 
-.listaempleados{
+.listaCliente{
+    display: grid;
+    border: 1px solid black;
+    grid-template-columns: auto auto auto auto;
+}
+
+
+
+.listaProducto{
+    display: grid;
+    border: 1px solid black;
+    grid-template-columns: auto auto auto auto;
+}
+
+
+.listaProveedores{
     display: grid;
     border: 1px solid black;
     grid-template-columns: auto auto auto auto;

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<h1> Lista de Productos</h1>
+
+<div class="listaProducto">
+    <h2><strong>Identificador</strong></h2>
+    <h2><strong>Descripcion</strong></h2>
+    <h2><strong>Precio</strong></h2>
+    <h2><strong>Marca</strong></h2>
+    <h2><strong>Proveedor</strong></h2>
+    <h2><strong>Acciones</strong></h2>
+
+    {% for producto in productos %}
+    <p>{{producto.identificador}}</p>
+    <p>{{producto.descripcion}}</p>
+    <p>{{producto.precio}}</p>
+
+    {% for item in producto.marca.all %}
+        <td>{{item.marca}}</td>
+    {% endfor %}
+                    
+        <td>{{producto.proveedor.nombre}}</td>
+     
+    <p>
+        <a href="{%url 'producto_app:Detalle del producto' producto.identificador%}">Ver  </a>
+        <a href="{%url 'producto_app:Actualizar producto' producto.identificador%}">Modificar  </a>
+        <a href="{%url 'producto_app:Eliminar Producto' producto.identificador%}">Eliminar</a>
+    </p>
+    {% endfor %}
+
+</div>
+
+
+
+
+{% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}">Atras</a>
+    {% endif %}
+
+    {% for pagina in paginator.page_range %}
+    {% ifequal pagina page_obj.number %}
+        {{pagina}}
+    {% else %}
+        <a href="?page={{pagina}}">{{pagina}}</a>
+    {% endifequal %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{page_obj.next_page_number}}">Siguiente</a>
+    {% endif %}
+
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1> Detalle de Proveedores</h1>
+
+<ul>
+    <li> Id: {{detalle.identificador}} </li>   
+    <li> Nombre: {{detalle.nombre}} </li>
+    <li> Email: {{detalle.email}} </li>
+    <li> Telefono: {{detalle.telefono}} </li>
+</ul>
+    
+{% endblock content %}
+    

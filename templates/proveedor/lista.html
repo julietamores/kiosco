@@ -5,21 +5,24 @@
 
 
 
-<h1> Lista de Clientes</h1>
+<h1> Lista de Proveedores</h1>
 
-<div class="listaCliente">
-    <h2><strong>Apellido</strong></h2>
+<div class="listaProveedores">
+    <h2><strong>Id</strong></h2>
     <h2><strong>Nombre</strong></h2>
-    <h2><strong>Dni</strong></h2>
+    <h2><strong>Email</strong></h2>
+    <h2><strong>Telefono</strong></h2>
     <h2><strong>Acciones</strong></h2>
-    {% for cliente in clientes %}
-    <p>{{cliente.apellido}}</p>
-    <p>{{cliente.nombre}}</p>
-    <p>{{cliente.documento}}</p>
+
+    {% for proveedor in proveedores %}
+    <p>{{proveedor.identificador}}</p>
+    <p>{{proveedor.nombre}}</p>
+    <p>{{proveedor.email}}</p>
+    <p>{{proveedor.telefono}}</p>
     <p>
-        <a href="{%url 'cliente_app:Detalle del cliente' cliente.documento%}">Ver  </a>
-        <a href="{%url 'cliente_app:Actualizar cliente' cliente.documento%}">Modificar  </a>
-        <a href="{%url 'cliente_app:Baja de cliente' cliente.documento%}">Eliminar</a>
+        <a href="{%url 'proveedor_app:Detalle del proveedor' proveedor.identificador%}">Ver  </a>
+        <a href="{%url 'proveedor_app:Actualizar proveedor' proveedor.identificador%}">Modificar  </a>
+        <a href="{%url 'proveedor_app:Baja de proveedor' proveedor.identificador%}">Eliminar</a>
     </p>
     {% endfor %}
 
@@ -50,4 +53,3 @@
 
 {% endblock content %}
     
-

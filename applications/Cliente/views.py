@@ -18,8 +18,14 @@ from django.views.generic import (
 class ClienteListView(ListView):
     model = Cliente
     template_name = "cliente/lista.html"
-    paginate_by = 3
-    context_object_name = 'cliente'
+    paginate_by = 8
+    context_object_name = 'clientes'
+
+    def get_queryset(self):
+        lista = Cliente.objects.all()
+        return lista
+
+    
 
 
 class BuscarClienteListView(ListView):

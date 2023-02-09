@@ -8,7 +8,7 @@ class Cliente(models.Model):
     nombre = models.CharField('nombre del cliente', max_length=50)
     apellido = models.CharField('apellido del cliente', max_length=50)
     razonSocial = models.CharField('razonSocial del cliente', max_length=50)
-    documento = models.IntegerField()
+    documento = models.IntegerField(primary_key=True)
 
     class Meta:
         """Meta definition for Cliente."""

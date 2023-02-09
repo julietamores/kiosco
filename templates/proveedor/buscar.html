@@ -5,13 +5,13 @@
 
 
 <form method="GET">
-    <input type="text" placeholder="apellido" id="kword" name="kword">
+    <input type="text" placeholder="identificador" id="kword" name="kword">
     <input type="submit" value="buscar">    
 </form>
 
 <ul>
-    {% for Cliente in Clientes %}
-        <li>{{Cliente.apellido}}, {{Cliente.nombre}}</li>
+    {% for proveedor in proveedores %}
+        <li>{{proveedor.nombre}}, {{proveedor.telefono}}</li>
     {% endfor %}
 </ul>
 
