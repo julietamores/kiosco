@@ -9,6 +9,8 @@ class Cliente(models.Model):
     apellido = models.CharField('apellido del cliente', max_length=50)
     razonSocial = models.CharField('razonSocial del cliente', max_length=50)
     documento = models.IntegerField(primary_key=True)
+    avatar = models.ImageField('imagen', upload_to='cliente', height_field=None, width_field=None, max_length=None, blank=True)
+    telefono = models.IntegerField ('telefono del cliente', default = 0)
 
     class Meta:
         """Meta definition for Cliente."""

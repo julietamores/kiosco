@@ -15,6 +15,7 @@ class ClienteForm(forms.ModelForm):
             'nombre',
             'razonSocial',
             'documento',
+            'avatar',
         )
 
 

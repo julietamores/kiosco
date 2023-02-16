@@ -3,6 +3,14 @@
 
 {% block content %}
 
+{% if detalle.avatar %}
+    <img src="{{detalle.avatar.url}}" alt="">
+{% else %}
+    <img src="{% static 'img/imagen.jpg' %}" alt=""
+{% endif %}
+
+
+
     <h1> Detalle de Clientes</h1>
 
 <ul>

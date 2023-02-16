@@ -64,7 +64,7 @@ class ProductoCreateView(CreateView):
 class ProductoUpdateView(UpdateView):
     model = Producto
     template_name = "producto/update.html"
-    form_class = ClienteForm
+    form_class = ProductoForm
     success_url = reverse_lazy('producto_app:Lista de productos')
 
     def form_valid(self, form):
