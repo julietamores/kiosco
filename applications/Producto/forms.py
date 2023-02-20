@@ -13,9 +13,7 @@ class ProductoForm(forms.ModelForm):
         fields = (
             'identificador',
             'descripcion',
-            'precio',
-            'marca',
-            'proveedor',
+            'precio'
         )
 
 

@@ -8,38 +8,38 @@ app_name = 'producto_app'
 urlpatterns = [
 
     path(
-        'lista/',
+        'producto/lista/',
         views.ProductoListView.as_view(),
         name='Lista de productos'
     ),
 
     path(
-        'buscar/',
+        'producto/buscar/',
         views.BuscarProductoListView.as_view(),
         name='Buscar producto'
         ),
 
     path(
-        'detalle/<pk>/',
+        'producto/detalle/<pk>/',
         views.ProductoDetailView.as_view(),
         name='Detalle del producto'
     ),
 
 
      path(
-        'create/',
+        'producto/create/',
         views.ProductoCreateView.as_view(),
         name='Alta de producto'
     ),
 
      path(
-        'update/<pk>/',
+        'producto/update/<pk>/',
         views.ProductoUpdateView.as_view(),
         name='Actualizar producto'
     ),
 
      path(
-        'delete/<pk>/',
+        'producto/delete/<pk>/',
         views.ProductoDeleteView.as_view(),
         name='Eliminar Producto'
     ),

@@ -1,5 +1,5 @@
 from django.db import models
-from applications.Proveedor.models import Proveedor
+
 
 
 
@@ -27,9 +27,8 @@ class Producto(models.Model):
     identificador = models.IntegerField( primary_key=True)
     descripcion = models.CharField('Descripcion de Producto', max_length=50)
     precio = models.IntegerField()
-    marca = models.ManyToManyField(Marca)
-    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE,default='')
-
+    marca = models.CharField('marca de Producto', max_length=50)
+    
     class Meta:
         """Meta definition for Producto."""
 
@@ -38,7 +37,7 @@ class Producto(models.Model):
 
     def __str__(self):
         """Unicode representation of Producto."""
-        return f"{self.identificador} {self.nombre}"
+        return f"{self.identificador} {self.descripcion}"
 
 
 
