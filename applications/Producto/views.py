@@ -62,7 +62,19 @@ class LogoutView(View):
             )
         )
 
-    
+
+
+class ProductoListView(ListView):
+    model = Producto
+    template_name = "producto/lista.html"
+    paginate_by = 8
+    context_object_name = 'productos'
+
+    def get_queryset(self):
+        lista = Producto.objects.all()
+        return lista
+
+       
 
 class BuscarProductoListView(ListView):
     model = Producto
