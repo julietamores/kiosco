@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block panel %}
+<h1 class="text-center display-4 font-weight-bold font-italic bg-dark text-light">PANEL DE PRODUCTOS</h1>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center sticky-top">
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar"> 
+        <!-- Links LISTADO PRODUCTOS-->
+
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'inicio_app:inicio'%}">INICIO</a>
+            </li>
+        </ul>
+        
+        <ul class="navbar-nav mx-auto">
+        
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'producto_app:Alta de producto'%}">AGREGAR PRODUCTO</a>
+            </li>
+
+            <!-- Dropdown DE ACCIONES -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" data-toggle="tooltip" data-placement="right" title="Refrescar luego de ordenar">
+                    ORDENAR
+                </a>
+
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'producto_app:producto-nombre'%}">Por Nombre</a>
+                    <a class="dropdown-item" href="{% url 'producto_app:producto-marca'%}">Por Marca</a>
+                </div>
+
+            </li>
+
+                <a class="navbar-brand" href="{% url 'producto_app:panel-producto'%}">
+                    <i class="fa-solid fa-rotate ml-3" data-toggle="tooltip" data-placement="right" title="Refrescar"></i>
+                </a>
+<!--                  <p class="navbar-text">Refrescar luego de ordenar</p>     -->
+        </ul>
+
+     
+        <form method="GET" class="form-inline mx-5 ">
+            <input class="form-control" type="text" placeholder="Buscar" id="dato" name="dato">
+            <button class="btn btn-lg btn-success fa-solid fa-magnifying-glass" type="submit" data-toggle="tooltip" data-placement="right" title="Buscar"></button>
+        </form>        
+           <a class="fa-solid fa-circle-xmark btn btn-danger btn-lg" type="submit" href="{% url 'producto_app:logout-producto'%}"  data-toggle="tooltip" data-placement="right" title="Salir"></a>
+
+
+    </div>
+
+</nav>
+
+
+
+<div class="table-responsive">
+
+    <table class="table table-dark table-hover table-wrapper-scroll-y">
+        <thead>
+            <tr>
+                <th>Identificador</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Marca</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+    
+
+        <tbody>
+            
+            {% for producto in productos  %}
+
+            <tr>
+                <td>{{producto.identificador}}</td>
+                <td>{{producto.descripcion}}</td>
+
+                {% for item in producto.marca.all %}
+                    <td>{{item.marca}}</td>
+                {% endfor %}
+                    
+               
+                <td>   
+                    <div class="dropdown dropright">
+                    
+                    <button type="button" class="btn btn-outline-warning btn-sm dropdown-toggle" data-toggle="dropdown"> 
+                    Accion
+                    </button>
+                    
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'producto_app:Actualizar producto' producto.identificador%}">Modificar</a>
+                            <a class="dropdown-item" href="{% url 'producto_app:Detalle del producto' producto.identificador%}">Detalles</a>
+                            <a class="dropdown-item" href="{% url 'producto_app:Eliminar producto' producto.identificador%}">Borrar</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            {% endfor %}
+        
+        </tbody>
+        
+        
+  </table>
+    
+</div>
+
+<ul class="pagination justify-content-center" style="margin:20px 0">
+    {% if is_paginated %}
+        
+        {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Atras</a></li>    
+        {% endif %}
+                
+        
+        {% for pagina in paginator.page_range %}
+            {% ifequal pagina page_obj.number %} 
+                <li class="page-item active"><a class="page-link">{{ pagina }}</a></li> 
+            
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{pagina}}">{{pagina}}</a></li>       
+            {% endifequal %}
+        {% endfor %}
+            
+        {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Siguiente</a></li>
+        {% endif %}
+    {% endif %}
+</ul>
+
+
+{% endblock panel %}

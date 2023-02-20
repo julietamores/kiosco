@@ -8,6 +8,22 @@ app_name = 'proveedor_app'
 urlpatterns = [
 
     path(
+        'login/',
+        views.LoginUser.as_view(),
+        name='login-proveedor'
+    ),
+    path(
+        'proveedor/panel/',
+        views.Panel.as_view(),
+        name='panel-proveedor'
+    ),
+    path(
+        'proveedor/logout/',
+        views.LogoutView.as_view(),
+        name='logout-proveedor'
+    ),
+
+    path(
         'proveedor/lista/',
         views.ProveedorListView.as_view(),
         name='Lista de proveedores'

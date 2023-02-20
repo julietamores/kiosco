@@ -2,6 +2,15 @@ from django.shortcuts import render
 from .models import Cliente
 from django.urls import reverse_lazy, reverse 
 from .forms import ClienteForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect, HttpResponse
+from .forms import LoginForm, ClienteForm
+from rest_framework.generics import ListAPIView
+from .serializer import ClienteSerializer
+from django.views.generic.edit import (
+    FormView
+)
 
 # Create your views here.
 from django.views.generic import (
@@ -13,6 +22,52 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
+
+
+class LoginUser(FormView):
+    template_name = "cliente/login.html"
+    form_class = LoginForm
+    success_url = reverse_lazy('cliente_app: panel-cliente') 
+    context_object_name = 'login'
+    
+    def form_valid(self, form):
+        user = authenticate(
+            username = form.cleaned_data['username'],
+            password = form.cleaned_data['password']
+            )
+        login(self.request, user)
+        return super(LoginUser, self).form_valid(form)
+
+
+class Panel(ListView):
+    model = Cliente
+    template_name = 'cliente/panel.html'
+    context_object_name = 'clientes'
+    paginate_by = 5
+
+    
+    def get_queryset(self):
+        #definimos variables donde obtendremos los request
+        dato = self.request.GET.get('dato','')
+        #del model Cliente filtramos los atributos que necesitamos
+        lista = (
+            Cliente.objects.filter(dni__icontains = dato) 
+            |Cliente.objects.filter(nombre__icontains = dato) 
+            |Cliente.objects.filter(apellido__icontains = dato) 
+        )
+        return lista
+    
+class LogoutView(View):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return HttpResponseRedirect(
+            reverse(
+                'cliente_app:login-cliente'
+            )
+        )
+
+
+
 
 
 class ClienteListView(ListView):
@@ -82,4 +137,9 @@ class ClienteDeleteView(DeleteView):
     success_url = reverse_lazy('cliente_app:Lista de clientes')
 
 
+class ClienteListApiView(ListAPIView):
 
+    serializer_class = ClienteSerializer
+
+    def get_queryset(self):
+        return Cliente.objects.all()

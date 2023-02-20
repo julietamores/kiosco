@@ -8,6 +8,22 @@ app_name = 'producto_app'
 urlpatterns = [
 
     path(
+        'login/',
+        views.LoginUser.as_view(),
+        name='login-producto'
+    ),
+    path(
+        'producto/panel/',
+        views.Panel.as_view(),
+        name='panel-producto'
+    ),
+    path(
+        'producto/logout/',
+        views.LogoutView.as_view(),
+        name='logout-producto'
+    ),
+
+    path(
         'producto/lista/',
         views.ProductoListView.as_view(),
         name='Lista de productos'

@@ -20,6 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+import json 
+
 with open("secret.json") as f:
     secret = json.loads(f.read())
 
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
     'applications.Producto',
     'applications.Proveedor',
     'applications.Home.urls',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

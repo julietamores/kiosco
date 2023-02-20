@@ -2,10 +2,27 @@ from django.contrib import admin
 from django.urls import path, re_path, include 
 from . import views 
 
+
 app_name = 'cliente_app'
 
 
 urlpatterns = [
+
+    path(
+        'login/',
+        views.LoginUser.as_view(),
+        name='login-cliente'
+    ),
+    path(
+        'cliente/panel/',
+        views.Panel.as_view(),
+        name='panel-cliente'
+    ),
+    path(
+        'cliente/logout/',
+        views.LogoutView.as_view(),
+        name='logout-cliente'
+    ),
 
     path(
         'cliente/lista/',
