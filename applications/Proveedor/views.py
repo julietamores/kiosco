@@ -5,9 +5,12 @@ from .forms import ProveedorForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, HttpResponse
-from .form import LoginForm, ProveedorForm
+from .forms import LoginForm, ProveedorForm
 from rest_framework.generics import ListAPIView
 from .serializer import ProveedorSerializer
+from django.views.generic.edit import (
+    FormView
+)
 
 # Create your views here.
 from django.views.generic import (
