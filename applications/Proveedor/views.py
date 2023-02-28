@@ -24,7 +24,7 @@ from django.views.generic import (
 )
 
 class LoginUser(FormView):
-    template_name = "proveedor/login.html"
+    template_name = "login.html"
     form_class = LoginForm
     success_url = reverse_lazy('proveedor_app:panel-proveedor')
     context_object_name = 'login'
@@ -40,7 +40,7 @@ class LoginUser(FormView):
 
 class Panel(ListView):
     model = Proveedor
-    template_name = 'proveedor/panel.html'
+    template_name = "proveedor/panel.html"
     context_object_name = 'proveedores'
     paginate_by = 5
 

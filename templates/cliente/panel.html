@@ -1,4 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'base.html'%}
+
 {% load static %}
 
 {% block panel %}
@@ -13,15 +14,11 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar"> 
         <!-- Links LISTADO CLIENTES-->
         
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'inicio_app:inicio'%}">INICIO</a>
-            </li>
-        </ul>
+     
         
         <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'cliente_app:Alta de Cliente'%}">DAR DE ALTA</a>
+                <a class="nav-link" href="{% url 'cliente_app:Alta de clientes'%}">DAR DE ALTA</a>
             </li>
 
             <!-- Dropdown DE ACCIONES -->
@@ -67,7 +64,7 @@
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Razon Social</th>
-                <th>DNI</th>
+                <th>Documento</th>
                 <th>Avatar</th>
                 <th>Telefono</th>
                 <th>ACCIONES</th>
@@ -93,9 +90,9 @@
                     </button>
                     
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'cliente_app:Actualizar Cliente' cliente.dni%}">Modificar</a>
-                            <a class="dropdown-item" href="{% url 'cliente_app:Detalle del Cliente' cliente.dni%}">Detalles</a>
-                            <a class="dropdown-item" href="{% url 'cliente_app:Baja de Cliente' cliente.dni%}">Borrar</a>
+                            <a class="dropdown-item" href="{% url 'cliente_app:Actualizar Cliente' cliente.documento%}">Modificar</a>
+                            <a class="dropdown-item" href="{% url 'cliente_app:Detalle del Cliente' cliente.documento%}">Detalles</a>
+                            <a class="dropdown-item" href="{% url 'cliente_app:Baja de Cliente' cliente.documento%}">Borrar</a>
                         </div>
                     </div>
                 </td>

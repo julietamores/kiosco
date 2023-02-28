@@ -25,9 +25,9 @@ from django.views.generic import (
 
 
 class LoginUser(FormView):
-    template_name = "cliente/login.html"
+    template_name = "login.html"
     form_class = LoginForm
-    success_url = reverse_lazy('cliente_app: panel-cliente') 
+    success_url = reverse_lazy('cliente_app:panel-cliente') 
     context_object_name = 'login'
     
     def form_valid(self, form):
@@ -41,7 +41,7 @@ class LoginUser(FormView):
 
 class Panel(ListView):
     model = Cliente
-    template_name = 'cliente/panel.html'
+    template_name = "cliente/panel.html"
     context_object_name = 'clientes'
     paginate_by = 5
 
@@ -51,7 +51,7 @@ class Panel(ListView):
         dato = self.request.GET.get('dato','')
         #del model Cliente filtramos los atributos que necesitamos
         lista = (
-            Cliente.objects.filter(dni__icontains = dato) 
+            Cliente.objects.filter(documento__icontains = dato) 
             |Cliente.objects.filter(nombre__icontains = dato) 
             |Cliente.objects.filter(apellido__icontains = dato) 
         )
