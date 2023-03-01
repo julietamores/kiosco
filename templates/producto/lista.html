@@ -3,39 +3,41 @@
 
 {% block content %}
 
+<h1>Lista de Productos</h1>
 
+<table>
+<thead>
+<tr>
+<th>Identificador</th>
+<th>Descripcion</th>
+<th>Precio</th>
+<th>Marca</th>
+<th>Acciones</th>
+</tr>
+</thead>
 
-<h1> Lista de Productos</h1>
-
-<div class="listaProducto">
-    <h2><strong>Identificador</strong></h2>
-    <h2><strong>Descripcion</strong></h2>
-    <h2><strong>Precio</strong></h2>
-    <h2><strong>Marca</strong></h2>
-    <h2><strong>Proveedor</strong></h2>
-    <h2><strong>Acciones</strong></h2>
-
+<tbody>
     {% for producto in productos %}
-    <p>{{producto.identificador}}</p>
-    <p>{{producto.descripcion}}</p>
-    <p>{{producto.precio}}</p>
-
-    {% for item in producto.marca.all %}
-        <td>{{item.marca}}</td>
+    <tr>
+    <td>{{ producto.identificador }}</td>
+    <td>{{ producto.descripcion }}</td>
+    <td>{{ producto.precio }}</td>
+    <td>
+    {{producto.marca}}
+    </td>
+    <td>{{ producto.proveedor.nombre }}</td>
+    <td>
+    <a href="{% url 'producto_app:Detalle del producto' producto.identificador %}">Ver</a>
+    <a href="{% url 'producto_app:Actualizar producto' producto.identificador %}">Modificar</a>
+    <a href="{% url 'producto_app:Eliminar Producto' producto.identificador %}">Eliminar</a>
+    </td>
+    </tr>
     {% endfor %}
-                    
-        <td>{{producto.proveedor.nombre}}</td>
-     
-    <p>
-        <a href="{%url 'producto_app:Detalle del producto' producto.identificador%}">Ver  </a>
-        <a href="{%url 'producto_app:Actualizar producto' producto.identificador%}">Modificar  </a>
-        <a href="{%url 'producto_app:Eliminar Producto' producto.identificador%}">Eliminar</a>
-    </p>
-    {% endfor %}
+    </tbody>
+    </table>
 
-</div>
-
-
+   
+    
 
 
 {% if is_paginated %}

@@ -39,23 +39,11 @@ class LoginUser(FormView):
         return super(LoginUser, self).form_valid(form)
 
 
-class Panel(ListView):
-    model = Cliente
+class Panel(LoginRequiredMixin, TemplateView):
     template_name = "cliente/panel.html"
-    context_object_name = 'clientes'
-    paginate_by = 5
-
+    login_url = reverse_lazy ('cliente_app:login-cliente')
     
-    def get_queryset(self):
-        #definimos variables donde obtendremos los request
-        dato = self.request.GET.get('dato','')
-        #del model Cliente filtramos los atributos que necesitamos
-        lista = (
-            Cliente.objects.filter(documento__icontains = dato) 
-            |Cliente.objects.filter(nombre__icontains = dato) 
-            |Cliente.objects.filter(apellido__icontains = dato) 
-        )
-        return lista
+
     
 class LogoutView(View):
     def get(self, request, *args, **kwargs):
@@ -70,7 +58,7 @@ class LogoutView(View):
 
 
 
-class ClienteListView(ListView):
+class ClienteListView(LoginRequiredMixin ,ListView):
     model = Cliente
     template_name = "cliente/lista.html"
     paginate_by = 8
@@ -103,7 +91,7 @@ class ClienteDetailView(DetailView):
     context_object_name = 'detalle'
 
 
-class ClienteCreateView(CreateView):
+class ClienteCreateView(LoginRequiredMixin, CreateView):
     model = Cliente
     template_name = "cliente/create.html"
     form_class = ClienteForm

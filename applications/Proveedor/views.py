@@ -38,24 +38,10 @@ class LoginUser(FormView):
         return super(LoginUser, self).form_valid(form)
 
 
-class Panel(ListView):
-    model = Proveedor
+class Panel(LoginRequiredMixin, TemplateView):
     template_name = "proveedor/panel.html"
-    context_object_name = 'proveedores'
-    paginate_by = 5
+    login_url = reverse_lazy ('proveedor_app:login-proveedor')
 
-    
-    def get_queryset(self):
-        #definimos variables donde obtendremos los request
-        
-        dato = self.request.GET.get('dato','')
-        #del model Proveedor filtramos los atributos que necesitamos
-        lista = (
-            Proveedor.objects.filter(identificador__icontains = dato) 
-            | Proveedor.objects.filter(nombre__icontains = dato) 
-            | Proveedor.objects.filter(rubro__icontains = dato)
-                )
-        return lista
     
 class LogoutView(View):
     def get(self, request, *args, **kwargs):
@@ -68,7 +54,7 @@ class LogoutView(View):
 
 
 
-class ProveedorListView(ListView):
+class ProveedorListView(LoginRequiredMixin, ListView):
     model = Proveedor
     template_name = "proveedor/lista.html"
     paginate_by = 8
@@ -101,17 +87,14 @@ class ProveedorDetailView(DetailView):
     context_object_name = 'detalle'
 
 
-class ProveedorCreateView(CreateView):
+class ProveedorCreateView(LoginRequiredMixin, CreateView):
     model = Proveedor
     template_name = "proveedor/create.html"
     form_class = ProveedorForm
     success_url = reverse_lazy('proveedor_app:Lista de proveedores')
+    login_url = reverse_lazy('proveedor_app:login-proveedor')
 
-    def form_valid(self, form):
-        prov = form.save(commit=False)
-        prov.identificador = prov.nombre + '' + prov.telefono 
-        prov.save()
-        return super(ProveedorCreateView,self).form_valid(form)
+   
 
 
 

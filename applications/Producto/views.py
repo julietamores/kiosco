@@ -36,22 +36,10 @@ class LoginUser(FormView):
         return super(LoginUser, self).form_valid(form)
 
 
-class Panel(ListView):
-    model = Producto
+
+class Panel(LoginRequiredMixin, TemplateView):
     template_name = "producto/panel.html"
-    context_object_name = 'producto'
-    paginate_by = 5
-    
-    def get_queryset(self):
-        #definimos variables donde obtendremos los request
-        dato = self.request.GET.get('dato','')
-        #del model Producto filtramos los atributos que necesitamos
-        lista = (
-            Producto.objects.filter(identificador__icontains = dato) 
-            | Producto.objects.filter(nombre__icontains = dato) 
-            | Producto.objects.filter(tipo__icontains = dato) 
-        )
-        return lista
+    login_url = reverse_lazy ('producto_app:login-producto')
     
 class LogoutView(View):
     def get(self, request, *args, **kwargs):
@@ -64,7 +52,7 @@ class LogoutView(View):
 
 
 
-class ProductoListView(ListView):
+class ProductoListView(LoginRequiredMixin, ListView):
     model = Producto
     template_name = "producto/lista.html"
     paginate_by = 8
@@ -96,7 +84,7 @@ class ProductoDetailView(DetailView):
     context_object_name = 'detalle'
 
 
-class ProductoCreateView(CreateView):
+class ProductoCreateView(LoginRequiredMixin, CreateView):
     model = Producto
     template_name = "producto/create.html"
     form_class = ProductoForm
@@ -115,12 +103,9 @@ class ProductoUpdateView(UpdateView):
     template_name = "producto/update.html"
     form_class = ProductoForm
     success_url = reverse_lazy('producto_app:Lista de productos')
+    login_url = reverse_lazy('producto_app:login-producto')
 
-    def form_valid(self, form):
-        prod = form.save(commit=False)
-        prod.identificador = prod.descripcion + '' + prod.item.marca
-        prod.save()
-        return super(ProductoUpdateView,self).form_valid(form)
+   
 
 
 
