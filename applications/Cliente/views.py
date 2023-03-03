@@ -61,8 +61,9 @@ class LogoutView(View):
 class ClienteListView(LoginRequiredMixin ,ListView):
     model = Cliente
     template_name = "cliente/lista.html"
-    paginate_by = 8
+    paginate_by = 5
     context_object_name = 'clientes'
+    ordering = 'identificador'
 
     def get_queryset(self):
         lista = Cliente.objects.all()
@@ -115,7 +116,7 @@ class ClienteUpdateView(UpdateView):
         clientela = form.save(commit=False)
         clientela.razonSocial = clientela.nombre + '' + clientela.apellido
         clientela.save()
-        return super(ClienteUpdateView,self).form_valid(form)
+        return super(ClienteUpdateView,self).form_valid(form) 
 
 
 

@@ -3,29 +3,39 @@
 
 {% block content %}
 
-
-
-<h1> Lista de Proveedores</h1>
+<h1>Lista de Proveedores</h1>
 
 <div class="listaProveedores">
-    <h2><strong>Id</strong></h2>
-    <h2><strong>Nombre</strong></h2>
-    <h2><strong>Email</strong></h2>
-    <h2><strong>Telefono</strong></h2>
-    <h2><strong>Acciones</strong></h2>
+    <table>
+        <thead>
+            <tr>
+                <th><strong>Id</strong></th>
+                <th><strong>Nombre</strong></th>
+                <th><strong>Email</strong></th>
+                <th><strong>Telefono</strong></th>
+                <th><strong>Acciones</strong></th>
+            </tr>
+        </thead>
 
-    {% for proveedor in proveedores %}
-    <p>{{proveedor.identificador}}</p>
-    <p>{{proveedor.nombre}}</p>
-    <p>{{proveedor.email}}</p>
-    <p>{{proveedor.telefono}}</p>
-    <p>
-        <a href="{%url 'proveedor_app:Detalle del proveedor' proveedor.identificador%}">Ver  </a>
-        <a href="{%url 'proveedor_app:Actualizar proveedor' proveedor.identificador%}">Modificar  </a>
-        <a href="{%url 'proveedor_app:Baja de proveedor' proveedor.identificador%}">Eliminar</a>
-    </p>
-    {% endfor %}
+        <tbody>
+            {% for proveedor in proveedores %}
 
+            <tr>
+                <td>{{proveedor.identificador}}</td>
+                <td>{{proveedor.nombre}}</td>
+                <td>{{proveedor.email}}</td>
+                <td>{{proveedor.telefono}}</td>
+
+                <td>
+                    <a href="{%url 'proveedor_app:Detalle del proveedor' proveedor.identificador%}">Ver  </a>
+                    <a href="{%url 'proveedor_app:Actualizar proveedor' proveedor.identificador%}">Modificar  </a>
+                    <a href="{%url 'proveedor_app:Baja de proveedor' proveedor.identificador%}">Eliminar</a>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 

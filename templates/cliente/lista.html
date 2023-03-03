@@ -3,27 +3,39 @@
 
 {% block content %}
 
-
-
-<h1> Lista de Clientes</h1>
+<h1>Lista de Clientes</h1>
 
 <div class="listaCliente">
-    <h2><strong>Apellido</strong></h2>
-    <h2><strong>Nombre</strong></h2>
-    <h2><strong>Dni</strong></h2>
-    <h2><strong>Acciones</strong></h2>
-    {% for cliente in clientes %}
-    <p>{{cliente.apellido}}</p>
-    <p>{{cliente.nombre}}</p>
-    <p>{{cliente.documento}}</p>
-    
-    <p>
-        <a href="{%url 'cliente_app:Detalle del cliente' cliente.documento%}">Ver  </a>
-        <a href="{%url 'cliente_app:Actualizar cliente' cliente.documento%}">Modificar  </a>
-        <a href="{%url 'cliente_app:Baja de cliente' cliente.documento%}">Eliminar</a>
-    </p>
-    {% endfor %}
+    <table id="tabla"> 
+        <thead>
+            <tr>
+                <th><strong>Id</strong></th>
+                <th><strong>Apellido</strong></th>
+                <th><strong>Nombre</strong></th>
+                <th><strong>Dni</strong></th>
+                <th><strong>Acciones</strong></th>
+            </tr>
+        </thead>
 
+        <tbody>
+            {% for cliente in clientes %}
+
+            <tr>
+                <td>{{cliente.identificador}}</td>
+                <td>{{cliente.apellido}}</td>
+                <td>{{cliente.nombre}}</td>
+                <td>{{cliente.documento}}</td>
+                
+                <td>
+                    <a href="{%url 'cliente_app:Detalle del cliente' cliente.identificador%}">Ver  </a>
+                    <a href="{%url 'cliente_app:Actualizar cliente' cliente.identificador%}">Modificar  </a>
+                    <a href="{%url 'cliente_app:Baja de cliente' cliente.identificador%}">Eliminar</a>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 

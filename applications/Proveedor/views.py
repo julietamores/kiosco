@@ -57,8 +57,9 @@ class LogoutView(View):
 class ProveedorListView(LoginRequiredMixin, ListView):
     model = Proveedor
     template_name = "proveedor/lista.html"
-    paginate_by = 8
+    paginate_by = 5
     context_object_name = 'proveedores'
+    ordering = 'identificador'
 
     def get_queryset(self):
         lista = Proveedor.objects.all()
@@ -104,11 +105,7 @@ class ProveedorUpdateView(UpdateView):
     form_class = ProveedorForm
     success_url = reverse_lazy('proveedor_app:Lista de proveedores')
 
-    def form_valid(self, form):
-        prov = form.save(commit=False)
-        prov.identificador = prov.nombre + '' + prov.telefono
-        prov.save()
-        return super(ProveedorUpdateView,self).form_valid(form)
+   
 
 
 

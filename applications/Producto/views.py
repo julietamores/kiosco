@@ -55,8 +55,9 @@ class LogoutView(View):
 class ProductoListView(LoginRequiredMixin, ListView):
     model = Producto
     template_name = "producto/lista.html"
-    paginate_by = 8
+    paginate_by = 5
     context_object_name = 'productos'
+    ordering = 'identificador'
 
     def get_queryset(self):
         lista = Producto.objects.all()
@@ -90,11 +91,7 @@ class ProductoCreateView(LoginRequiredMixin, CreateView):
     form_class = ProductoForm
     success_url = reverse_lazy('producto_app:Lista de productos')
 
-    def form_valid(self, form):
-        prod = form.save(commit=False)
-        prod.identificador = prod.descripcion + '' + prod.item.marca
-        prod.save()
-        return super(ProductoCreateView,self).form_valid(form)
+    
 
 
 

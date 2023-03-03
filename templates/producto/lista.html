@@ -5,37 +5,39 @@
 
 <h1>Lista de Productos</h1>
 
-<table>
-<thead>
-<tr>
-<th>Identificador</th>
-<th>Descripcion</th>
-<th>Precio</th>
-<th>Marca</th>
-<th>Acciones</th>
-</tr>
-</thead>
+<div class="listaProducto">
+    <table>
+        <thead>
+            <tr>
+                <th><strong>Identificador</strong></th>
+                <th><strong>Descripcion</strong></th>
+                <th><strong>Precio</strong></th>
+                <th><strong>Marca</strong></th>
+                <th><strong>Acciones</strong></th>
+            </tr>
+        </thead>
 
-<tbody>
-    {% for producto in productos %}
-    <tr>
-    <td>{{ producto.identificador }}</td>
-    <td>{{ producto.descripcion }}</td>
-    <td>{{ producto.precio }}</td>
-    <td>
-    {{producto.marca}}
-    </td>
-    <td>{{ producto.proveedor.nombre }}</td>
-    <td>
-    <a href="{% url 'producto_app:Detalle del producto' producto.identificador %}">Ver</a>
-    <a href="{% url 'producto_app:Actualizar producto' producto.identificador %}">Modificar</a>
-    <a href="{% url 'producto_app:Eliminar Producto' producto.identificador %}">Eliminar</a>
-    </td>
-    </tr>
-    {% endfor %}
-    </tbody>
+        <tbody>
+            {% for producto in productos %}
+
+            <tr>
+                <td>{{ producto.identificador }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{producto.marca}}</td>
+                <td>{{ producto.proveedor.nombre }}</td>
+
+                <td>
+                    <a href="{% url 'producto_app:Detalle del producto' producto.identificador %}">Ver</a>
+                    <a href="{% url 'producto_app:Actualizar producto' producto.identificador %}">Modificar</a>
+                    <a href="{% url 'producto_app:Eliminar Producto' producto.identificador %}">Eliminar</a>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
     </table>
-
+</div> 
    
     
 

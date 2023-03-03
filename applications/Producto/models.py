@@ -24,7 +24,7 @@ class Marca(models.Model):
 class Producto(models.Model):
     """Model definition for Producto."""
 
-    identificador = models.IntegerField( primary_key=True)
+    identificador = models.BigAutoField('id de producto',primary_key=True)
     descripcion = models.CharField('Descripcion de Producto', max_length=50)
     precio = models.IntegerField()
     marca = models.CharField('marca de Producto', max_length=50)
